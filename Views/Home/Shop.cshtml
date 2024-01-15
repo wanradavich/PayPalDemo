@@ -1,0 +1,55 @@
+﻿
+<div class="home-top-content">
+    <h3 class="deck-master-heading">DECK MASTER</h3>
+    <p class="home-subheading">You won't find better</p>
+
+</div>
+<hr />
+<div class="shop-main">
+    <div class="shop-card">
+        <div class="image-group">
+            <img class="shopcard-img" src="~/images/DeckOfCards.png">
+            <div class="d-flex justify-content-center "
+                 style="color:crimson; font-size: 1.5em;">
+                $<span id="itemPrice">@Model.Split('|')[0]</span>
+                <span style="">&nbsp;</span>
+                <span id="currency">@Model.Split('|')[1]</span>
+            </div>
+        </div> 
+        <p class="card-desc">Are you looking for a fun and affordable way to pass the time? Look no further than our high-quality deck of cards! At only $3.79, this deck of cards is an excellent value.</p>
+    </div>
+    <hr />
+    <div class="shop-card">
+        <div class="image-group">
+            <img class="shopcard-img" src="~/images/FiveAces.jpg">
+            <div class="d-flex justify-content-center "
+                 style="color:crimson; font-size: 1.5em;">
+                $<span id="itemPrice">@Model.Split('|')[0]</span>
+                <span style="">&nbsp;</span>
+                <span id="currency">@Model.Split('|')[1]</span>
+            </div>
+        </div>
+        <p class="card-desc">Are you tired of being caught without an ace up your sleeve? Well, have no fear! Our special deck of cards comes with an extra ace, so you can always have the upper hand. And at just $4.95, it's a steal!</p>
+    </div>
+    <hr />
+    <div class="shop-card">
+        <div class="image-group">
+            <img class="shopcard-img" src="~/images/BlackDeck.jpeg">
+            <div class="d-flex justify-content-center "
+                 style="color:crimson; font-size: 1.5em;">
+                $<span id="itemPrice">@Model.Split('|')[0]</span>
+                <span style="">&nbsp;</span>
+                <span id="currency">@Model.Split('|')[1]</span>
+            </div>
+        </div>
+        <p class="card-desc">Upgrade your card game with our premium black-styled deck of cards. Made with high-quality materials and featuring a sleek black design. At just $7.79, it's a small price to pay to make a big statement!</p>
+    </div>
+    <hr />
+    <button id="shop-login" class="btn btn-danger">
+        <a asp-area="Identity" asp-page="/Account/Login">Login to Purchase</a>
+    </button>
+</div>
+
+
+
+

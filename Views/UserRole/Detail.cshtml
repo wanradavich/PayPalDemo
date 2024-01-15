@@ -1,0 +1,65 @@
+﻿@model IEnumerable<PayPalDemo.ViewModels.UserRoleVM>
+
+@{
+    ViewData["Title"] = "User Roles Detail";
+    string message = ViewBag.Message;
+}
+
+<h3>User: @ViewBag.UserName</h3>
+
+@if (message.Length > 0)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+
+<p>
+    @Html.ActionLink( "Assign Roles"
+    , "Create"
+    , new { userName = @ViewBag.UserName })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>@Html.DisplayNameFor(model => model.RoleName)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* @foreach (var item in Model)
+        {
+        <tr>
+        <th>@ViewBag.UserName</th>
+        <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
+        <td>
+        @Html.ActionLink("Delete", "Delete", new { role = item.RoleName,  email = item.Email })
+        </td>
+        </tr>
+
+
+        } *@
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { role = item.RoleName,  email = item.Email })
+                </td>
+            </tr>
+
+            <form asp-action="Delete" asp-route-roleName="@item.RoleName" method="get">
+                <input type="hidden" asp-for=@item.Email value=@item.Email />
+                <input type="hidden" asp-for=@item.RoleName value=@item.RoleName />
+                @*   <input type="submit" value="Delete" class="btn btn-danger" /> | *@
+                <a asp-action="Index">Back to List</a>
+            </form>
+        }
+    </tbody>
+</table>
+

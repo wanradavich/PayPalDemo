@@ -1,0 +1,159 @@
+html {
+  font-size: 14px;
+}
+
+.bg-maroon {
+    background-color: maroon;
+}
+
+.nav-logo {
+    width: 75px; 
+    height: 75px;
+}
+
+.navbar-collapse{
+    color: white;
+    font-size: 20px;
+}
+
+/*index*/
+.home-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.home-img {
+    width: 50px;
+    height: 200px;
+    opacity: 0.1;
+    margin-top: 60px;
+}
+.home-content{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+}
+
+.home-desc{
+    margin: 40px;
+}
+
+.deck-master-heading{
+    color: maroon;
+    font-weight: bolder;
+    margin:0;
+    padding:0;
+}
+
+.home-subheading{
+    color: grey;
+    font-size: 25px;
+}
+
+.home-top-content {
+    display: flex;
+   justify-content: center;
+   align-items:center; 
+   flex-direction: column;
+
+}
+
+.home-shop-btn{
+    background-color:maroon;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 100px;
+}
+
+.home-shop-btn:hover {
+    background-color:maroon;
+}
+
+.home-shop-btn>a{
+    text-decoration: none;
+    color:white;
+}
+
+/*login*/
+
+.login-title{
+    color: maroon;
+}
+
+.login-links > a{
+    color: maroon;
+}
+
+#login-submit{
+    background-color: maroon;
+}
+
+/*register*/
+#registerSubmit{
+    background-color: maroon;
+}
+
+.register-header-title{
+    color: maroon;
+}
+
+/*shop*/
+.shop-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.shop-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    height: auto;
+}
+.image-group{
+    width: 200px;
+}
+
+.shopcard-img{
+    width: 200px;
+    height: auto;
+}
+
+.card-desc{
+    width: 400px;
+    margin-left: 40px;
+}
+
+#shop-login{
+    background-color: maroon;
+    color:white;
+    margin: 30px;
+}
+
+#shop-login>a{
+    text-decoration: none;
+    color:white;
+}
+
+@media (min-width: 768px) {
+    html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
