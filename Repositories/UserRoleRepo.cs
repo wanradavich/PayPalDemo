@@ -5,6 +5,7 @@ namespace PayPalDemo.Repositories
 {
     public class UserRoleRepo
     {
+      
         private readonly UserManager<IdentityUser> _userManager;
 
         public UserRoleRepo(UserManager<IdentityUser> userManager)

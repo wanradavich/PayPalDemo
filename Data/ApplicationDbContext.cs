@@ -10,7 +10,6 @@ public class ApplicationDbContext : IdentityDbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
            base(options)
     {
-
     }
 
     public DbSet<MyRegisteredUser> MyRegisteredUsers { get; set; }

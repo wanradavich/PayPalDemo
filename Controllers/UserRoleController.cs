@@ -10,19 +10,19 @@ namespace PayPalDemo.Controllers
     public class UserRoleController : Controller
     {
 
-        private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
         public UserRoleController(ApplicationDbContext context,
                                  UserManager<IdentityUser> userManager)
         {
-            _db = context;
+            _context = context;
             _userManager = userManager;
         }
 
         public ActionResult Index(string message = "")
         {
-            UserRepo userRepo = new UserRepo(_db);
+            UserRepo userRepo = new UserRepo(_context);
             IEnumerable<UserVM> users = userRepo.GetAllUsers();
 
             ViewBag.Message = message;
@@ -33,7 +33,7 @@ namespace PayPalDemo.Controllers
                                                 string message = "")
         {
             UserRoleRepo userRoleRepo = new UserRoleRepo(_userManager);
-            MyRegisteredUserRepo myRegisteredUserRepo = new MyRegisteredUserRepo(_db);
+            MyRegisteredUserRepo myRegisteredUserRepo = new MyRegisteredUserRepo(_context);
             var registeredUser = myRegisteredUserRepo.GetUserNameByEmail(userName);
 
 
@@ -48,11 +48,11 @@ namespace PayPalDemo.Controllers
 
         public ActionResult Create()
         {
-            RoleRepo roleRepo = new RoleRepo(_db);
+            RoleRepo roleRepo = new RoleRepo(_context);
             ViewBag.RoleSelectList = roleRepo.GetRoleSelectList();
 
 
-            UserRepo userRepo = new UserRepo(_db);
+            UserRepo userRepo = new UserRepo(_context);
             ViewBag.UserSelectList = userRepo.GetUserSelectList();
             return View();
         }
@@ -88,10 +88,10 @@ namespace PayPalDemo.Controllers
                 }
             }
 
-            RoleRepo roleRepo = new RoleRepo(_db);
+            RoleRepo roleRepo = new RoleRepo(_context);
             ViewBag.RoleSelectList = roleRepo.GetRoleSelectList();
 
-            UserRepo userRepo = new UserRepo(_db);
+            UserRepo userRepo = new UserRepo(_context);
             ViewBag.UserSelectList = userRepo.GetUserSelectList();
 
             return View();

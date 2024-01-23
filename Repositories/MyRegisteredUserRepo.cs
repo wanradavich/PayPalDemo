@@ -21,21 +21,12 @@ namespace PayPalDemo.Repositories
 
         public string GetUserNameByEmail(string userEmail)
         {
-            var user = _context.MyRegisteredUsers.FirstOrDefault(u => u.Email == userEmail);
+            var user = _context.MyRegisteredUsers.FirstOrDefault(u => u.Email.ToLower() == userEmail.ToLower());
             return user.FirstName + " " + user.LastName;
+         
 
         }
 
-        //public void GetUserNameByEmail(string email, string firstName, string lastName)
-        //{
-        //    MyRegisteredUser registerUser = new MyRegisteredUser()
-        //    {
-        //        Email = email,
-        //        FirstName = firstName,
-        //        LastName = lastName
-        //    };
-        //    _context.MyRegisteredUsers.Add(registerUser);
-        //    _context.SaveChanges();
-        //}
+        
     }
 }

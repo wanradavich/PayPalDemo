@@ -56,6 +56,7 @@
             <form asp-action="Delete" asp-route-roleName="@item.RoleName" method="get">
                 <input type="hidden" asp-for=@item.Email value=@item.Email />
                 <input type="hidden" asp-for=@item.RoleName value=@item.RoleName />
+
                 @*   <input type="submit" value="Delete" class="btn btn-danger" /> | *@
                 <a asp-action="Index">Back to List</a>
             </form>

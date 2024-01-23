@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PayPalDemo.Models;
 
@@ -8,11 +9,13 @@ namespace PayPalDemo.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IConfiguration configuration)
         {
             _logger = logger;
             _context = context;
+            _configuration = configuration; 
         }
 
         // Home page shows list of items.
@@ -21,7 +24,12 @@ namespace PayPalDemo.Controllers
         // Item price is set through the ViewBag.
         public IActionResult Index()
         {
-           return View();
+
+            var adminUserName = _configuration["adminLogin:Username"];
+            var adminPassword = _configuration["AdminLogin:Password"];
+            var connectionString = _configuration["ConnectionStrings:DefaultConnection"];
+
+            return View();
             //return View("Index", "3.55|CAD");
         }
 
@@ -65,6 +73,21 @@ namespace PayPalDemo.Controllers
 
             return View("Confirmation", transaction);
         }
+
+        public IActionResult PayPalConfirmation(PayPalConfirmationModel payPalConfirmationModel)
+        {
+            return View(payPalConfirmationModel);
+        }
+
+        //[Authorize]
+        public IActionResult SecureArea()
+        {
+            string userName = User.Identity.Name;
+            var registeredUser = _context.MyRegisteredUsers.FirstOrDefault(ru => ru.Email == userName);
+
+            return View(registeredUser);
+        }
+
 
 
     }

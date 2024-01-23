@@ -19,7 +19,8 @@ namespace PayPalDemo.Repositories
             var roles =
                 _db.Roles.Select(r => new RoleVM
                 {
-                    RoleName = r.Name
+                    RoleName = r.Name,
+                    Id = GenerateRoleId(r.Name)
                 });
 
             return roles;
@@ -47,6 +48,7 @@ namespace PayPalDemo.Repositories
             {
                 _db.Roles.Add(new IdentityRole
                 {
+                    //Id = roleName.ToLower(),
                     Id = roleName.ToLower(),
                     Name = roleName,
                     NormalizedName = roleName.ToUpper()
@@ -66,7 +68,7 @@ namespace PayPalDemo.Repositories
             var roles = GetAllRoles().Select(r => new
             SelectListItem
             {
-                Value = r.RoleName,
+                Value = r.Id,
                 Text = r.RoleName
             });
 
@@ -120,6 +122,17 @@ namespace PayPalDemo.Repositories
                 }
             }
             return isSuccess;
+        }
+
+        public static string GenerateRoleId(string roleName)
+        {
+            if (string.IsNullOrEmpty(roleName) || roleName.Length < 2)
+            {
+                throw new ArgumentException("Role Name should have at least 2 letters");
+            }
+
+            string id = roleName.Substring(0, 2).ToUpper();
+            return id;
         }
 
     }

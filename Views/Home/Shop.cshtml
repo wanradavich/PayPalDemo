@@ -45,10 +45,61 @@
         <p class="card-desc">Upgrade your card game with our premium black-styled deck of cards. Made with high-quality materials and featuring a sleek black design. At just $7.79, it's a small price to pay to make a big statement!</p>
     </div>
     <hr />
+  @*     @if (User.IsInRole("Admin") || User.IsInRole("User"))
+    { *@
+        <div id="paypal-button-container"></div>
+ @*    } *@
     <button id="shop-login" class="btn btn-danger">
         <a asp-area="Identity" asp-page="/Account/Login">Login to Purchase</a>
     </button>
 </div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AbUW4Zxa39SKMRWZRmHovL1lXa42uV3XSzv04VEaBhFxstt6C42cnwUYdePrq-_qBjzPU5dkpSq8t8oU"></script>
+<script>
+    paypal.Buttons({
+        // Set up the transaction
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: document.getElementById('itemPrice').value,
+                        currency:
+                            document.getElementById('currency').value
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+
+
+                // Redirect to the PayPalConfirmation action method
+                window.location.href =
+                    '/Home/PayPalConfirmation?TransactionId=' +
+                    encodeURIComponent(details.id) + '&Amount=' +
+                    encodeURIComponent(details.purchase_units[0]
+                        .amount.value) + '&PayerName=' +
+                    encodeURIComponent(details.payer.name.given_name);
+            });
+        },
+
+
+        onCancel: function (data) {
+            alert('Transaction was cancelled.');
+        },
+        onError: function (err) {
+            alert('An error occurred during the transaction.');
+        },
+        style: {
+            layout: 'vertical', // 'vertical', 'horizontal'
+            color: 'blue',      // 'gold', 'blue', 'silver', 'black'
+            shape: 'rect',      // 'rect', 'pill'
+            label: 'paypal'     // 'checkout', 'pay', 'buynow', 'paypal'
+        }
+    }).render('#paypal-button-container');
+</script>
 
 
 

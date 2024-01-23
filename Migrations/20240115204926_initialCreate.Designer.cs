@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PayPalDemo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240115021649_initialCreate")]
+    [Migration("20240115204926_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
