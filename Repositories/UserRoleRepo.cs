@@ -47,7 +47,7 @@ namespace PayPalDemo.Repositories
 
         public async Task<IEnumerable<UserRoleVM>> GetUserRolesAsync(string email)
         {
-            if (email == null) { email = "admin@home.com"; }
+            //if (email == null) { email = "admin@home.com"; }
 
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null)

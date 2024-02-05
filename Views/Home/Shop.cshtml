@@ -4,55 +4,140 @@
     <p class="home-subheading">You won't find better</p>
 
 </div>
-<hr />
+
 <div class="shop-main">
     <div class="shop-card">
         <div class="image-group">
             <img class="shopcard-img" src="~/images/DeckOfCards.png">
             <div class="d-flex justify-content-center "
-                 style="color:crimson; font-size: 1.5em;">
+                 style="color:crimson; font-size: 1.2em;">
                 $<span id="itemPrice">@Model.Split('|')[0]</span>
                 <span style="">&nbsp;</span>
                 <span id="currency">@Model.Split('|')[1]</span>
             </div>
         </div> 
         <p class="card-desc">Are you looking for a fun and affordable way to pass the time? Look no further than our high-quality deck of cards! At only $3.79, this deck of cards is an excellent value.</p>
+        <div class="button-container">
+            <div id="shop-button-container" class="d-flex flex-column">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="remove-from-cart">Remove from Cart</button>
+            </div>
+            <div class="table-container">
+                <table class="cart-table">
+                    <tr>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>$7.25 CAD</td>
+                    </tr>
+                </table>
+            </div>
+        </div>       
     </div>
-    <hr />
+ 
     <div class="shop-card">
         <div class="image-group">
             <img class="shopcard-img" src="~/images/FiveAces.jpg">
             <div class="d-flex justify-content-center "
-                 style="color:crimson; font-size: 1.5em;">
+                 style="color:crimson; font-size: 1.2em;">
                 $<span id="itemPrice">@Model.Split('|')[0]</span>
                 <span style="">&nbsp;</span>
                 <span id="currency">@Model.Split('|')[1]</span>
             </div>
         </div>
         <p class="card-desc">Are you tired of being caught without an ace up your sleeve? Well, have no fear! Our special deck of cards comes with an extra ace, so you can always have the upper hand. And at just $4.95, it's a steal!</p>
-    </div>
-    <hr />
+        <div class="button-container">
+            <div id="shop-button-container" class="d-flex flex-column">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="remove-from-cart">Remove from Cart</button>
+            </div>
+            <div class="table-container">
+                <table class="cart-table">
+                    <tr>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>$7.25 CAD</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+     </div>
+      
     <div class="shop-card">
         <div class="image-group">
             <img class="shopcard-img" src="~/images/BlackDeck.jpeg">
             <div class="d-flex justify-content-center "
-                 style="color:crimson; font-size: 1.5em;">
+                 style="color:crimson; font-size: 1.2em;">
                 $<span id="itemPrice">@Model.Split('|')[0]</span>
                 <span style="">&nbsp;</span>
                 <span id="currency">@Model.Split('|')[1]</span>
             </div>
         </div>
         <p class="card-desc">Upgrade your card game with our premium black-styled deck of cards. Made with high-quality materials and featuring a sleek black design. At just $7.79, it's a small price to pay to make a big statement!</p>
-    </div>
-    <hr />
+            <div class="button-container">
+                <div id="shop-button-container" class="d-flex flex-column">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="remove-from-cart">Remove from Cart</button>
+                </div>
+                <div class="table-container">
+                    <table class="cart-table">
+                        <tr>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>$7.25 CAD</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+       
   @*     @if (User.IsInRole("Admin") || User.IsInRole("User"))
     { *@
-        <div id="paypal-button-container"></div>
+
+            
+       
+        
  @*    } *@
+
+
+<div class="payment-box">
+    <div class="paypal-box">
+        <div id="paypal-button-container"></div>
+    </div>
+    <div class="table-box">
+        <div class="payment-table-container">
+            <table class="cart-table">
+                <tr>
+                    <th>Total</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>$7.25 CAD</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+</div>
+<div class="shop-login-box">
     <button id="shop-login" class="btn btn-danger">
         <a asp-area="Identity" asp-page="/Account/Login">Login to Purchase</a>
     </button>
 </div>
+
 
 <script src="https://www.paypal.com/sdk/js?client-id=AbUW4Zxa39SKMRWZRmHovL1lXa42uV3XSzv04VEaBhFxstt6C42cnwUYdePrq-_qBjzPU5dkpSq8t8oU"></script>
 <script>

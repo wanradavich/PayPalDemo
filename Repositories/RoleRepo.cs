@@ -48,7 +48,7 @@ namespace PayPalDemo.Repositories
             {
                 _db.Roles.Add(new IdentityRole
                 {
-                    //Id = roleName.ToLower(),
+                   
                     Id = roleName.ToLower(),
                     Name = roleName,
                     NormalizedName = roleName.ToUpper()
@@ -68,7 +68,7 @@ namespace PayPalDemo.Repositories
             var roles = GetAllRoles().Select(r => new
             SelectListItem
             {
-                Value = r.Id,
+                Value = r.RoleName,
                 Text = r.RoleName
             });
 
