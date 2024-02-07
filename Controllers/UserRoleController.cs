@@ -6,7 +6,7 @@ using PayPalDemo.ViewModels;
 
 namespace PayPalDemo.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class UserRoleController : Controller
     {
 
@@ -56,48 +56,10 @@ namespace PayPalDemo.Controllers
             ViewBag.UserSelectList = userRepo.GetUserSelectList();
             return View();
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Create(UserRoleVM userRoleVM)
-        //{
-        //    UserRoleRepo userRoleRepo = new UserRoleRepo(_userManager);
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            var addUR =
-        //            await userRoleRepo.AddUserRoleAsync(userRoleVM.Email,
-        //                                                userRoleVM.RoleName);
-
-        //            string message = $"{userRoleVM.RoleName} permissions" +
-        //                             $" successfully added to " +
-        //                             $"{userRoleVM.Email}.";
-
-        //            return RedirectToAction("Detail", "UserRole",
-        //                              new
-        //                              {
-        //                                  userName = userRoleVM.Email,
-        //                                  message = message
-        //                              });
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            ModelState.AddModelError("", "UserRole creation failed.");
-        //            ModelState.AddModelError("", "The Role may exist " +
-        //                                         "for this user.");
-        //        }
-        //    }
-
-        //    RoleRepo roleRepo = new RoleRepo(_context);
-        //    ViewBag.RoleSelectList = roleRepo.GetRoleSelectList();
-
-        //    UserRepo userRepo = new UserRepo(_context);
-        //    ViewBag.UserSelectList = userRepo.GetUserSelectList();
-
-        //    return View();
-        //}
+       
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserRoleVM userRoleVM)
         {
             UserRoleRepo userRoleRepo = new UserRoleRepo(_userManager);
