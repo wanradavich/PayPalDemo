@@ -24,10 +24,16 @@ namespace PayPalDemo.Controllers
         // Item price is set through the ViewBag.
         public IActionResult Index()
         {
-
+          
+            var siteKey = _configuration["Recaptcha:SiteKey"];
+            var secretKey = _configuration["Recaptcha:SecretKey"];
+            var clientId = _configuration["PayPal:ClientId"];
+            var secret = _configuration["PayPal:Secret"];
             var adminUserName = _configuration["adminLogin:Username"];
             var adminPassword = _configuration["AdminLogin:Password"];
             var connectionString = _configuration["ConnectionStrings:DefaultConnection"];
+            var payPalClient = _configuration["PayPal:ClientId"];
+            ViewData["PayPalClientId"] = payPalClient;
 
             return View();
             //return View("Index", "3.55|CAD");
@@ -42,11 +48,7 @@ namespace PayPalDemo.Controllers
         }
         public IActionResult Transactions()
         {
-
-            //DbSet<IPN> items = _context.IPNs;
-            DbSet<Transaction> items = _context.transactions;
-
-
+            DbSet<IPN> items = _context.IPNs;
             return View(items);
         }
 
@@ -55,24 +57,6 @@ namespace PayPalDemo.Controllers
             return View(payPalConfirmationModel);
         }
 
-        [HttpPost]
-        public IActionResult PayPalConfirmation(string transactionId, decimal amount, string currency, string payerName)
-        {
-            // Save the transaction to the database
-            var transaction = new Transaction
-            {
-                TransactionId = transactionId,
-                Amount = amount,
-                Currency = currency,
-                PayerName = payerName,
-                Timestamp = DateTime.Now
-            };
-
-            _context.transactions.Add(transaction);
-            _context.SaveChanges();
-
-            return RedirectToAction("Transactions");
-        }
 
         // This method receives and stores
         // the Paypal transaction details.
@@ -81,7 +65,7 @@ namespace PayPalDemo.Controllers
         {
             try
             {
-                //_context.IPNs.Add(ipn);
+                _context.IPNs.Add(ipn);
                 _context.SaveChanges();
             }
             catch (Exception ex)
@@ -94,15 +78,15 @@ namespace PayPalDemo.Controllers
         // Item price is set through the ViewBag.
         public IActionResult Confirmation(string confirmationId)
         {
-            Transaction transaction =
-            _context.transactions.FirstOrDefault(t => t.TransactionId == confirmationId);
+            IPN transaction =
+            _context.IPNs.FirstOrDefault(t => t.paymentID == confirmationId);
 
             return View("Confirmation", transaction);
         }
 
-       
 
-        //[Authorize]
+
+        [Authorize]
         public IActionResult SecureArea()
         {
             string userName = User.Identity.Name;

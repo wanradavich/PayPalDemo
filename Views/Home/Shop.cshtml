@@ -135,7 +135,7 @@
 
 
 
-@* paypal client Id *@
+@* paypal client Id: I haven't used the secrets.json ClientId variable set in my Index home controller here yet. *@
 <script src="https://www.paypal.com/sdk/js?client-id=AbUW4Zxa39SKMRWZRmHovL1lXa42uV3XSzv04VEaBhFxstt6C42cnwUYdePrq-_qBjzPU5dkpSq8t8oU"></script>
 
 
@@ -143,32 +143,21 @@
     paypal.Buttons({
         // Set up the transaction
         createOrder: function (data, actions) {
-            var shopCard = $(document.activeElement).closest('.shop-card');
-            var priceElement = shopCard.find('span[id^="itemPrice"]');
-            var currencyElement = shopCard.find('span[id^="currency"]');
-    
-            var price = parseFloat(getValidAmount(priceElement.text()));
-            var currency = currencyElement.text().trim();
-
-            return actions.order.create({
-                purchase_units: [{
-                amount: {
-                    value: price.toFixed(2),
-                    currency: currency
+     // Retrieve the total amount string from the HTML element with id "total"
+        var totalAmountString = document.getElementById('total').value;
+        
+        // Parse the total amount string to a floating-point number
+        var totalAmount = parseFloat(totalAmountString);
+    return actions.order.create({
+        purchase_units: [{
+            amount: {
+                value: totalAmount,
+                currency: "CAD"
             }
         }]
     });
+},
 
-            // return actions.order.create({
-            //     purchase_units: [{
-            //         amount: {
-            //             value: document.getElementById('itemPrice').value,
-            //             currency:
-            //                 document.getElementById('currency').value
-            //         }
-            //     }]
-            // });
-        },
 
         // Finalize the transaction
         onApprove: function (data, actions) {
@@ -190,7 +179,7 @@
             alert('Transaction was cancelled.');
         },
         onError: function (err) {
-            alert('An error occurred during the transaction.');
+            alert(err);
         },
         style: {
             layout: 'vertical', // 'vertical', 'horizontal'
