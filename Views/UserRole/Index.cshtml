@@ -4,31 +4,32 @@
     ViewData["Title"] = "User Roles";
 }
 
-<h1>User Roles</h1>
-<p>
-    <a asp-action="Create">Create New User Role</a>
-</p>
+<div class="header-line"></div>
+<main b-6eg8tbgho0 role="main" class="pb-3">
+    <div class="row">
+        <div class="colcol-sm-8 col-md-9 col-lg-6">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Email</td>
-                <td>
-                    @Html.ActionLink( "View Roles"
-                , "Detail"
-                , new { userName = item.Email })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
+            <table class="userRoleTable">
+                <thead>
+                    <tr class="userRoleHeading">
+                        <th>Users</th>
+                        <th><a asp-action="Create">Create New User Role</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="userRoleData">
+                            <td>@item.Email</td>
+                            <td class="userRoleLink">
+                                @Html.ActionLink( "View Roles"
+                            , "Detail"
+                            , new { userName = item.Email })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

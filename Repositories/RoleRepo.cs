@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PayPalDemo.ViewModels;
 
 namespace PayPalDemo.Repositories
@@ -40,28 +41,39 @@ namespace PayPalDemo.Repositories
             return null;
         }
 
-        public bool CreateRole(string roleName)
+        public bool CreateRole(string roleName, out RoleVM createdRole)
         {
-            bool isSuccess = true;
+            createdRole = null;
 
             try
             {
-                _db.Roles.Add(new IdentityRole
+              
+                IdentityRole newRole = new IdentityRole
                 {
-                   
-                    Id = roleName.ToLower(),
                     Name = roleName,
-                    NormalizedName = roleName.ToUpper()
-                });
+                    NormalizedName = roleName.ToUpper(),
+                    
+                };
+
+                _db.Roles.Add(newRole);
                 _db.SaveChanges();
+
+                string roleId = newRole.Id;
+
+                createdRole = new RoleVM
+                {
+                    RoleName = roleName,
+                    Id = roleId
+                };
+
+                return true;
             }
             catch (Exception)
             {
-                isSuccess = false;
+                return false;
             }
-
-            return isSuccess;
         }
+
 
         public SelectList GetRoleSelectList()
         {
@@ -86,7 +98,8 @@ namespace PayPalDemo.Repositories
 
             if (role == null)
             {
-                CreateRole(ADMIN);
+                RoleRepo roleRepo = new RoleRepo(_db);
+                CreateRole(ADMIN, out RoleVM createdRole);
             }
         }
         // Logic for role deletion can be included here.
@@ -131,7 +144,7 @@ namespace PayPalDemo.Repositories
                 throw new ArgumentException("Role Name should have at least 2 letters");
             }
 
-            string id = roleName.Substring(0, 2).ToUpper();
+            string id = roleName.Substring(0, 2);
             return id;
         }
 

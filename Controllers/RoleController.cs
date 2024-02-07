@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PayPalDemo.Repositories;
 using PayPalDemo.ViewModels;
+using System.Data;
 
 namespace PayPalDemo.Controllers
 {
@@ -25,21 +26,63 @@ namespace PayPalDemo.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //public IActionResult Create(RoleVM roleVM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            RoleRepo roleRepo = new RoleRepo(_context);
+
+        //            // Set Id manually based on the first two letters of RoleName
+        //            roleVM.Id = RoleRepo.GenerateRoleId(roleVM.RoleName);
+
+        //            bool isSuccess = roleRepo.CreateRole(roleVM.RoleName, out RoleVM createdRole);
+
+        //            if (isSuccess)
+        //            {
+        //                // Optionally, set a success message in ViewBag
+        //                ViewBag.Message = "Role created successfully.";
+
+        //                return RedirectToAction(nameof(Index));
+        //            }
+        //            else
+        //            {
+        //                // Handle the case where role creation fails
+        //                ViewBag.ErrorMessage = "Failed to create the role.";
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Handle exceptions, log, or display an error message
+        //            ViewBag.ErrorMessage = $"Error creating role: {ex.Message}";
+        //        }
+        //    }
+
+        //    // If ModelState is not valid or role creation fails, return to the Create view with the provided RoleVM
+        //    return View(roleVM);
+        //}
+
+
         [HttpPost]
         public ActionResult Create(RoleVM roleVM)
         {
+
             if (ModelState.IsValid)
             {
                 RoleRepo roleRepo = new RoleRepo(_context);
                 bool isSuccess =
-                    roleRepo.CreateRole(roleVM.RoleName);
+                    roleRepo.CreateRole(roleVM.RoleName, out RoleVM createdRole);
 
                 if (isSuccess)
                 {
+
                     string message = "Role created successfully";
                     return RedirectToAction("Index", "Role",
                         new
                         {
+                            id = createdRole.Id,
                             message = message
                         });
 

@@ -1,16 +1,11 @@
 ﻿
-<div class="home-top-content">
-    <h3 class="deck-master-heading">DECK MASTER</h3>
-    <p class="home-subheading">You won't find better</p>
-
-</div>
-
 <div class="shop-main">
     <div class="shop-card">
         <div class="image-group">
             <img class="shopcard-img" src="~/images/DeckOfCards.png">
-            <div class="d-flex justify-content-center "
-                 style="color:crimson; font-size: 1.2em;">
+            <div class="d-flex justify-content-center" style="color:crimson; font-size: 1.2em;"> 
+
+           
                 $<span id="itemPrice">@Model.Split('|')[0]</span>
                 <span style="">&nbsp;</span>
                 <span id="currency">@Model.Split('|')[1]</span>
@@ -19,7 +14,7 @@
         <p class="card-desc">Are you looking for a fun and affordable way to pass the time? Look no further than our high-quality deck of cards! At only $3.79, this deck of cards is an excellent value.</p>
         <div class="button-container">
             <div id="shop-button-container" class="d-flex flex-column">
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" id="addToCartBtn1">Add to Cart</button>
                 <button class="remove-from-cart">Remove from Cart</button>
             </div>
             <div class="table-container">
@@ -29,28 +24,29 @@
                         <th>Amount</th>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>$7.25 CAD</td>
+                        <td><span id="qty1">0</span></td>
+                        <td><span id="amount1">$0</span></td>
                     </tr>
                 </table>
             </div>
         </div>       
     </div>
  
-    <div class="shop-card">
+    <div class="shop-card" data-price="4.95">
         <div class="image-group">
             <img class="shopcard-img" src="~/images/FiveAces.jpg">
             <div class="d-flex justify-content-center "
                  style="color:crimson; font-size: 1.2em;">
-                $<span id="itemPrice">@Model.Split('|')[0]</span>
+                 
+                $<span id="itemPrice">@Model.Split('|')[2]</span>
                 <span style="">&nbsp;</span>
-                <span id="currency">@Model.Split('|')[1]</span>
+                <span id="currency">@Model.Split('|')[3]</span>
             </div>
         </div>
         <p class="card-desc">Are you tired of being caught without an ace up your sleeve? Well, have no fear! Our special deck of cards comes with an extra ace, so you can always have the upper hand. And at just $4.95, it's a steal!</p>
         <div class="button-container">
             <div id="shop-button-container" class="d-flex flex-column">
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" id="addToCartBtn2">Add to Cart</button>
                 <button class="remove-from-cart">Remove from Cart</button>
             </div>
             <div class="table-container">
@@ -60,41 +56,42 @@
                         <th>Amount</th>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>$7.25 CAD</td>
+                        <td><span id="qty2">0</span></td>
+                        <td><span id="amount2">$0</span></td>
                     </tr>
                 </table>
             </div>
         </div>
      </div>
       
-    <div class="shop-card">
+    <div class="shop-card" data-price="7.79">
         <div class="image-group">
             <img class="shopcard-img" src="~/images/BlackDeck.jpeg">
             <div class="d-flex justify-content-center "
                  style="color:crimson; font-size: 1.2em;">
-                $<span id="itemPrice">@Model.Split('|')[0]</span>
+                 
+                $<span id="itemPrice">@Model.Split('|')[4]</span>
                 <span style="">&nbsp;</span>
-                <span id="currency">@Model.Split('|')[1]</span>
+                <span id="currency">@Model.Split('|')[5]</span>
             </div>
         </div>
         <p class="card-desc">Upgrade your card game with our premium black-styled deck of cards. Made with high-quality materials and featuring a sleek black design. At just $7.79, it's a small price to pay to make a big statement!</p>
             <div class="button-container">
                 <div id="shop-button-container" class="d-flex flex-column">
-                    <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" id="addToCartBtn3">Add to Cart</button>
                     <button class="remove-from-cart">Remove from Cart</button>
                 </div>
                 <div class="table-container">
-                    <table class="cart-table">
-                        <tr>
-                            <th>Qty</th>
-                            <th>Amount</th>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>$7.25 CAD</td>
-                        </tr>
-                    </table>
+                <table class="cart-table">
+                    <tr>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr>
+                        <td><span id="qty3">0</span></td>
+                        <td><span id="amount3">$0</span</td>
+                    </tr>
+                </table>
                 </div>
             </div>
         </div>
@@ -102,17 +99,10 @@
 </div>
 
 
-       
-  @*     @if (User.IsInRole("Admin") || User.IsInRole("User"))
-    { *@
-
-            
-       
-        
- @*    } *@
-
-
-<div class="payment-box">
+@* @if (User.IsInRole("Admin") || User.IsInRole("User")) *@
+@if (User.Identity.IsAuthenticated)
+    {
+<div class="bottom-section">
     <div class="paypal-box">
         <div id="paypal-button-container"></div>
     </div>
@@ -120,39 +110,62 @@
         <div class="payment-table-container">
             <table class="cart-table">
                 <tr>
-                    <th>Total</th>
-                    <th>Amount</th>
+                    <th><span id="totalItems">Items</span></th>
+                    <th><span id="totalAmount" >Amount</span></th>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td>$7.25 CAD</td>
+                    <td><span id="totalQty">0</span></td>
+                    <td><span id="total">$0</span></td>
                 </tr>
             </table>
         </div>
+    </div> 
+</div>
+   }
+ 
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="shop-login-box">
+        <button id="shop-login" class="btn btn-danger">
+            <a asp-area="Identity" asp-page="/Account/Login">Login to Purchase</a>
+        </button>
     </div>
-    
-</div>
-<div class="shop-login-box">
-    <button id="shop-login" class="btn btn-danger">
-        <a asp-area="Identity" asp-page="/Account/Login">Login to Purchase</a>
-    </button>
-</div>
+}
 
 
+
+
+@* paypal client Id *@
 <script src="https://www.paypal.com/sdk/js?client-id=AbUW4Zxa39SKMRWZRmHovL1lXa42uV3XSzv04VEaBhFxstt6C42cnwUYdePrq-_qBjzPU5dkpSq8t8oU"></script>
 <script>
     paypal.Buttons({
         // Set up the transaction
         createOrder: function (data, actions) {
+            var shopCard = $(document.activeElement).closest('.shop-card');
+            var priceElement = shopCard.find('span[id^="itemPrice"]');
+            var currencyElement = shopCard.find('span[id^="currency"]');
+    
+            var price = parseFloat(getValidAmount(priceElement.text()));
+            var currency = currencyElement.text().trim();
+
             return actions.order.create({
                 purchase_units: [{
-                    amount: {
-                        value: document.getElementById('itemPrice').value,
-                        currency:
-                            document.getElementById('currency').value
-                    }
-                }]
-            });
+                amount: {
+                    value: price.toFixed(2),
+                    currency: currency
+            }
+        }]
+    });
+
+            // return actions.order.create({
+            //     purchase_units: [{
+            //         amount: {
+            //             value: document.getElementById('itemPrice').value,
+            //             currency:
+            //                 document.getElementById('currency').value
+            //         }
+            //     }]
+            // });
         },
 
         // Finalize the transaction
@@ -184,8 +197,84 @@
             label: 'paypal'     // 'checkout', 'pay', 'buynow', 'paypal'
         }
     }).render('#paypal-button-container');
+
 </script>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+    // Function to handle adding items to the cart
+    $(".add-to-cart").click(function () {
+        var shopCard = $(this).closest('.shop-card');
+        var qtyElement = shopCard.find('span[id^="qty"]');
+        var amountElement = shopCard.find('span[id^="amount"]');
+        var priceElement = shopCard.find('span[id^="itemPrice"]');
+        
+        var qty = parseInt(qtyElement.text());
+        var amount = parseFloat(getValidAmount(amountElement.text()));
+        var price = parseFloat(getValidAmount(priceElement.text()));
+
+        qty++; // Increment quantity by 1
+        amount += price; // Update amount with the item's price
+
+        // Update quantity and amount
+        qtyElement.text(qty);
+        amountElement.text('$' + amount.toFixed(2) + ' CAD');
+
+        // Update total
+        updateTotal();
+    });
+
+    // Function to handle removing items from the cart
+    $(".remove-from-cart").click(function () {
+        var shopCard = $(this).closest('.shop-card');
+        var qtyElement = shopCard.find('span[id^="qty"]');
+        var amountElement = shopCard.find('span[id^="amount"]');
+        var priceElement = shopCard.find('span[id^="itemPrice"]');
+        
+        var qty = parseInt(qtyElement.text());
+        var amount = parseFloat(getValidAmount(amountElement.text()));
+        var price = parseFloat(getValidAmount(priceElement.text()));
+
+        if (qty > 0) {
+            qty--; // Decrement quantity by 1
+            amount -= price; // Update amount with the item's price
+
+            // Update quantity and amount
+            qtyElement.text(qty);
+            amountElement.text('$' + amount.toFixed(2) + ' CAD');
+
+            // Update total
+            updateTotal();
+        }
+    });
+
+    // Function to ensure a valid amount is returned (replace non-numeric characters)
+    function getValidAmount(amountString) {
+        return parseFloat(amountString.replace(/[^\d.-]/g, '')) || 0;
+    }
+
+    // Function to update the total
+    function updateTotal() {
+        var total = 0;
+        var totalQty = 0;
+
+        $('.shop-card').each(function () {
+            var qty = parseInt($(this).find('span[id^="qty"]').text());
+            var amount = parseFloat($(this).find('span[id^="amount"]').text().replace('$', '').replace(' CAD', '')) || 0;
+            total += amount;
+            totalQty += qty;
+        });
+
+        // Update the total element
+        $('#total').text('$' + total.toFixed(2) + ' CAD');
+        $('#totalQty').text(totalQty);
+    }
+});
+
+
+
+</script>
 
 

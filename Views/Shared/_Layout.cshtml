@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PayPalDemo.styles.css" asp-append-version="true" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-maroon border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-darkred border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="nav-logo" src="~/images/DeckMasterGrey.png" ></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -26,23 +29,29 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Shop">Shop</a>
                         </li>
 
-                      @*   @if (User.IsInRole("Admin"))
-                        { *@
-
+                        @if (User.IsInRole("Admin"))
+                        {
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="UserRole" asp-action="Index">Users</a>
                         </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
-                            </li>
-                            
-                      @*   } *@
+                            </li>    
+                        }
                     </ul>
                     <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>
     </header>
+    <div class="nav-line"></div>
+    <div b-6eg8tbgho9 style="text-align: center; margin-bottom: 20px;">
+        <strong b-6eg8tbgho9 style="line-height: 1em; color: #8B0000;">
+            <span b-6eg8tbgho9 style="font-size: 1.6em;"><span b-6eg8tbgho9 style="font-size: 1.3em;">D</span>ECK</span>
+            <span b-6eg8tbgho9 style="font-size: 1.6em;"> <span b-6eg8tbgho9 style="font-size: 1.3em;">M</span>ASTER</span>
+        </strong>
+        <div b-6eg8tbgho9 style="font-size: 1.5em; line-height: .6em; color: #8B8B8B; font-weight:500;">You won't find better</div>
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
