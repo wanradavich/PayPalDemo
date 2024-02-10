@@ -36,8 +36,6 @@ namespace PayPalDemo.Controllers
             MyRegisteredUserRepo myRegisteredUserRepo = new MyRegisteredUserRepo(_context);
             var registeredUser = myRegisteredUserRepo.GetUserNameByEmail(userName);
 
-
-
             var roles = await userRoleRepo.GetUserRolesAsync(userName);
 
             ViewBag.Message = message;
