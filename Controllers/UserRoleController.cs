@@ -40,6 +40,7 @@ namespace PayPalDemo.Controllers
 
             ViewBag.Message = message;
             ViewBag.UserName = registeredUser;
+            ViewBag.Email = userName;
 
             return View(roles);
         }

@@ -37,13 +37,12 @@ namespace PayPalDemo.Controllers
 
             var siteKey = _configuration["Recaptcha:SiteKey"];
             var secretKey = _configuration["Recaptcha:SecretKey"];
-            var clientId = _configuration["PayPal:ClientId"];
-            var secret = _configuration["PayPal:Secret"];
             var adminUserName = _configuration["adminLogin:Username"];
             var adminPassword = _configuration["AdminLogin:Password"];
             var connectionString = _configuration["ConnectionStrings:DefaultConnection"];
             var payPalClient = _configuration["PayPal:ClientId"];
             ViewData["PayPalClientId"] = payPalClient;
+
 
             return View();
           

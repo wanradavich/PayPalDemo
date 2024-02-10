@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 var adminUserName = builder.Configuration["AdminLogin:Username"];
 var adminPassword = builder.Configuration["AdminLogin:Password"];
 var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+
 var siteKey = builder.Configuration["Recaptcha:SiteKey"];
 var secretKey = builder.Configuration["Recaptcha:SecretKey"];
 var clientId = builder.Configuration["PayPal:ClientId"];
