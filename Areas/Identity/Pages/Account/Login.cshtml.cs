@@ -117,7 +117,7 @@ namespace PayPalDemo.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    //Thread.Sleep(10000); 
+                    Thread.Sleep(10000);
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

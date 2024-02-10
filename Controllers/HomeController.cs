@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PayPalDemo.Models;
+using PayPalDemo.Repositories;
+using PayPalDemo.ViewModels;
 
 namespace PayPalDemo.Controllers
 {
@@ -36,7 +38,7 @@ namespace PayPalDemo.Controllers
             ViewData["PayPalClientId"] = payPalClient;
 
             return View();
-            //return View("Index", "3.55|CAD");
+          
         }
 
         // Home page shows list of items.
@@ -46,16 +48,15 @@ namespace PayPalDemo.Controllers
         {
             return View("Shop", "3.55|CAD|4.95|CAD|7.79|CAD");
         }
-        public IActionResult Transactions()
-        {
-            DbSet<IPN> items = _context.IPNs;
-            return View(items);
-        }
+     
 
         public IActionResult PayPalConfirmation(PayPalConfirmationModel payPalConfirmationModel)
         {
+            TransactionRepo transactionRepo = new TransactionRepo(_context);
+            transactionRepo.AddTransaction(payPalConfirmationModel);
             return View(payPalConfirmationModel);
         }
+
 
 
         // This method receives and stores
@@ -95,6 +96,12 @@ namespace PayPalDemo.Controllers
             return View(registeredUser);
         }
 
+        public IActionResult Transactions()
+        {
+            TransactionRepo transactionRepo  = new TransactionRepo(_context);
+            IEnumerable<TransactionVM> transactions = transactionRepo.GetAll();
+            return View(transactions);
+        }
 
 
     }

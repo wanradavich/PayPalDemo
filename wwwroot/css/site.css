@@ -325,6 +325,18 @@ a{
     color: darkred;
 }
 
+/*Transactions*/
+.transactions-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.paypal-img{
+    width: 120px;
+    height: 30px;
+}
+
 
 
 /* Mobile styles */

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<PayPalDemo.ViewModels.TransactionVM>
+
+@{
+    ViewData["Title"] = "Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="header-line"></div>
+<div class="transactions-header">
+    <h4 style="color: darkred">Transactions</h4>
+    <img class="paypal-img" src="~/images/PayPal.png" />
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+               <div class="row">
+                    <div class="col-12">
+                <th>
+                  @Html.DisplayNameFor(model => model.PaymentId)
+                </th>
+                   </div>
+               </div>  
+               <div class="row">
+                  <div class="col-12">
+                    <th>
+                      @Html.DisplayNameFor(model => model.CreatedAt)
+                    </th>
+                </div>
+               </div>
+               <div class="row">
+                <div class="col-12">
+                 <th>
+                    @Html.DisplayNameFor(model => model.PayerName)
+                 </th>
+                </div>
+               </div>
+               <div class="row">
+                <div class="col-12">
+                  <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                  </th>
+                </div>
+               </div>
+               <div class="row">
+                <div class="col-12">
+                 <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                 </th>
+                </div>
+               </div>
+               <div class="row">
+                <div class="col-12">
+                 <th>
+                   @Html.DisplayNameFor(model => model.ModeOfPayment)
+                 </th>
+                </div>
+               </div>
+               <div class="row">
+                <div class="col-12">
+                 <th></th>
+                </div>
+               </div>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                        @Html.DisplayFor(modelItem => item.PaymentId)
+            </td>
+            <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                        @Html.DisplayFor(modelItem => item.PayerName)
+            </td>
+            <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.Amount) @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                        @Html.DisplayFor(modelItem => item.ModeOfPayment)
+            </td>
+        </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -7,6 +7,7 @@ using PayPalDemo.ViewModels;
 
 public class ApplicationDbContext : IdentityDbContext
 {
+    public DbSet<TransactionVM> Transactions { get; set; }
     public DbSet<IPN> IPNs { get; set; }
     //public DbSet<Transaction> transactions { get; set; }
     public DbSet<Product> Products { get; set; }
