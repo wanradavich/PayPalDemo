@@ -56,7 +56,7 @@ namespace PayPalDemo.Controllers
             ViewBag.UserSelectList = userRepo.GetUserSelectList();
             return View();
         }
-       
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -126,25 +126,22 @@ namespace PayPalDemo.Controllers
         public async Task<IActionResult> Delete(UserRoleVM userRole)
         {
             UserRoleRepo userRoleRepo = new UserRoleRepo(_userManager);
+
             // Perform the deletion of UserRole
             var isSuccess = await userRoleRepo.RemoveUserRoleAsync(userRole.Email, userRole.RoleName);
             string message = "";
+
             if (isSuccess)
             {
-                message = $"'{userRole.RoleName}' removed successfully for user '{userRole.Email}'.";
-                return RedirectToAction("Detail", "UserRole",
-                  new
-                  {
-                      message = message
-                  });
-
+                message = $"Role '{userRole.RoleName}' removed successfully for user '{userRole.Email}'.";
             }
             else
             {
-                message = $"Failed to remove '{userRole.RoleName}' for  '{userRole.Email}'.";
+                message = $"Failed to remove role '{userRole.RoleName}' for user '{userRole.Email}'.";
             }
+
             // Redirect to the Detail page with the appropriate message
-            return RedirectToAction(nameof(Detail), new { userName = userRole.Email });
+            return RedirectToAction(nameof(Detail), new { userName = userRole.Email, message = message });
         }
 
 

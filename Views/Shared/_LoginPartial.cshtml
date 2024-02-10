@@ -3,6 +3,12 @@
 @inject UserManager<IdentityUser> UserManager
 @inject ApplicationDbContext _context  
 
+@{
+    var firstName = Context.Session.GetString("SessionUserName");
+    var helloLink = firstName != null ?
+    string.Format("Hello {0}!", firstName) : "";
+}
+
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {

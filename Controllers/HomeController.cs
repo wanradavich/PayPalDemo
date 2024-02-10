@@ -26,7 +26,15 @@ namespace PayPalDemo.Controllers
         // Item price is set through the ViewBag.
         public IActionResult Index()
         {
-          
+
+            string customerName = "";
+            customerName = _context.MyRegisteredUsers.FirstOrDefault(c => c.Email == User.Identity.Name)?.FirstName;
+            if (customerName == null)
+            {
+                customerName = "";
+            }
+            HttpContext.Session.SetString("SessionUserName", customerName);
+
             var siteKey = _configuration["Recaptcha:SiteKey"];
             var secretKey = _configuration["Recaptcha:SecretKey"];
             var clientId = _configuration["PayPal:ClientId"];
@@ -84,7 +92,6 @@ namespace PayPalDemo.Controllers
 
             return View("Confirmation", transaction);
         }
-
 
 
         [Authorize]

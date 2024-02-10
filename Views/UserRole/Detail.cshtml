@@ -30,18 +30,7 @@
         </tr>
     </thead>
     <tbody>
-        @* @foreach (var item in Model)
-        {
-        <tr>
-        <th>@ViewBag.UserName</th>
-        <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
-        <td>
-        @Html.ActionLink("Delete", "Delete", new { role = item.RoleName,  email = item.Email })
-        </td>
-        </tr>
-
-
-        } *@
+    
 
         @foreach (var item in Model)
         {
@@ -58,9 +47,10 @@
                 <input type="hidden" asp-for=@item.RoleName value=@item.RoleName />
 
                 @*   <input type="submit" value="Delete" class="btn btn-danger" /> | *@
-                <a asp-action="Index">Back to List</a>
+               
             </form>
         }
+        <a asp-action="Index">Back to List</a>
     </tbody>
 </table>
 
